@@ -1,16 +1,11 @@
 package br.com.ccgl.sunharvestbackend.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class RegisterRequest {
-    private String name;
-    private String username;
-    private String password;
-}
+public record RegisterRequest(
+        @NotBlank @Size(max = 100) String displayName,
+        @Email @NotBlank @Size(max = 100) String email,
+        @NotBlank @Size(min = 6, max = 100) String password
+) {}

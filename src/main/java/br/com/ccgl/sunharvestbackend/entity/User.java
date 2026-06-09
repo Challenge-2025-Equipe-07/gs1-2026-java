@@ -7,10 +7,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "tb_users")
+@Table(name = "TB_USER")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,26 +21,44 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
-    @SequenceGenerator(name = "users_seq", sequenceName = "SEQ_USERS", allocationSize = 1)
-    private Long id;
+    @Column(name = "ID_USER", length = 50)
+    private String id;
 
-    @Column(name = "name", nullable = false, length = 150)
-    private String name;
+    @Column(name = "EMAIL", unique = true, nullable = false, length = 100)
+    private String email;
 
-    @Column(name = "username", unique = true, nullable = false, length = 100)
-    private String username;
+    @Column(name = "PASSWORD_HASH", nullable = false, length = 255)
+    private String passwordHash;
 
-    @Column(name = "password", nullable = false, length = 255)
-    private String password;
+    @Column(name = "DISPLAY_NAME", nullable = false, length = 100)
+    private String displayName;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 20)
-    private Role role;
+    @Column(name = "CREATED_AT", nullable = false, updatable = false)
+    private Date createdAt;
+
+    @PrePersist
+    protected void prePersist() {
+        if (this.id == null) {
+            this.id = UUID.randomUUID().toString();
+        }
+        if (this.createdAt == null) {
+            this.createdAt = new Date();
+        }
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
     @Override
