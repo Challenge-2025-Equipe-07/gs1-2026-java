@@ -182,7 +182,7 @@ Dentro do SQL\*Plus, executar:
 ```sql
 SELECT table_name FROM user_tables;
 SELECT * FROM TB_SIMPLE_OBJECT;
-SELECT id, username, name FROM TB_USER;
+SELECT id, username, name FROM TB_USERS;
 EXIT;
 ```
 
