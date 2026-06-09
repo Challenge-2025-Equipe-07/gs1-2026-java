@@ -1,0 +1,50 @@
+services:
+  gs1-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gs1-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@gs1-oracle-db:1521/FREEPDB1
+      SPRING_DATASOURCE_USERNAME: sunharvest
+      SPRING_DATASOURCE_PASSWORD: sunharvest123
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: oracle.jdbc.OracleDriver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      gs1-oracle-db:
+        condition: service_healthy
+    networks:
+      - gs1-network
+    restart: unless-stopped
+
+  gs1-oracle-db:
+    image: gvenzl/oracle-free:23
+    container_name: gs1-oracle-db
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: oracle123
+      APP_USER: sunharvest
+      APP_USER_PASSWORD: sunharvest123
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 90s
+    networks:
+      - gs1-network
+    restart: unless-stopped
+volumes:
+  oracle-data:
+    name: gs1-oracle-data
+
+networks:
+  gs1-network:
+    name: gs1-network
+    driver: bridge
