@@ -27,6 +27,9 @@ A solução utiliza uma arquitetura de dois containers orquestrados via `docker-
 
 ---
 
+## Link video apresentação
+https://youtu.be/dy6_Hh09N7k
+
 ## Integrantes
 
 | RM     | Nome                       | Turma  |
