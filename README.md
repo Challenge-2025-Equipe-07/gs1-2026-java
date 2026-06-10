@@ -99,7 +99,7 @@ cd SunHarvest
 ./gradlew bootRun
 ```
 
-A aplicação sobe em `http://localhost:8080`.
+A aplicação sobe em `http://localhost:8080` ou `gs1-2026-java-production.up.railway.app`.
 
 ### Swagger UI
 `http://localhost:8080/swagger-ui.html`

@@ -27,7 +27,6 @@ RUN chown -R appuser:appgroup /app
 
 USER appuser
 
-ENV SPRING_PROFILES_ACTIVE=docker
 ENV SERVER_PORT=8080
 
 EXPOSE 8080
