@@ -40,6 +40,7 @@ public class AlertService {
         return toAlertResponse(alertRepository.save(alert));
     }
 
+    @Transactional(readOnly = true)
     public List<AlertResponse> getAlertsByFarm(Long farmId, String severity, String acknowledged) {
         List<Alert> alerts;
         if (severity != null && acknowledged != null) {
@@ -55,6 +56,7 @@ public class AlertService {
         return alerts.stream().map(this::toAlertResponse).toList();
     }
 
+    @Transactional(readOnly = true)
     public AlertResponse getAlertById(Long id) {
         Alert alert = alertRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Alerta não encontrado: " + id));

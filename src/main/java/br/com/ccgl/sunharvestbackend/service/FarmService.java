@@ -64,12 +64,14 @@ public class FarmService {
         return toFarmResponse(farmRepository.save(farm));
     }
 
+    @Transactional(readOnly = true)
     public List<FarmResponse> getFarmsByUser(String userId) {
         return farmRepository.findByUserEmail(userId).stream()
                 .map(this::toFarmResponse)
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public FarmResponse getFarmById(Long id, String userId) {
         Farm farm = farmRepository.findByIdAndUserEmail(id, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Fazenda não encontrada: " + id));

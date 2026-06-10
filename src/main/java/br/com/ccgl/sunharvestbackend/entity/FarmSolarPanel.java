@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 @Table(name = "TB_FARM_SOLAR_PANEL")
@@ -15,11 +14,12 @@ import java.util.UUID;
 @Builder
 public class FarmSolarPanel {
 
-    @EmbeddedId
-    private SolarPanelId id;
+    @Id
+    @Column(name = "ID_SOLAR_PANEL", length = 20)
+    private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TB_FARM_ID_FARM", insertable = false, updatable = false)
+    @JoinColumn(name = "TB_FARM_ID_FARM", nullable = false)
     private Farm farm;
 
     @Column(name = "SOLAR_PANEL_CAPACITY", precision = 10, scale = 2)
@@ -40,7 +40,7 @@ public class FarmSolarPanel {
     @PrePersist
     void prePersist() {
         if (this.id == null && this.farm != null && this.farm.getId() != null) {
-            this.id = new SolarPanelId(UUID.randomUUID().toString(), this.farm.getId());
+            this.id = "SP-" + this.farm.getId();
         }
     }
 }
