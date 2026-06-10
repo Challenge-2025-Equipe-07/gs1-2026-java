@@ -1,12 +1,41 @@
 # SunHarvest — Irrigação Solar Inteligente
 
-Sistema de gerenciamento de irrigação agrícola alimentado por energia solar com cálculo de evapotranspiração (ETo) via equação FAO-56 Penman-Monteith usando dados climáticos em tempo real da NASA POWER API.
+## Descrição da Solução
+
+O **SunHarvest Backend** é uma API REST desenvolvida em **Java 21** com **Spring Boot 4**, voltada para o desafio acadêmico **"Global Solution: O Espaço é a Nova Fronteira"**. A aplicação realiza operações CRUD completas, persistindo dados em um banco de dados **Oracle** conteinerizado com Docker.
+
+A solução utiliza uma arquitetura de dois containers orquestrados via `docker-compose`:
+
+- **rm564113-gs1-app** — Container da aplicação Java (Spring Boot)
+- **rm564113-gs1-oracle-db** — Container do banco de dados Oracle Free 23c
+
+---
+
+## Arquitetura Macro
+
+> **Insira aqui o link para o Desenho da Arquitetura Macro da solução.**
+>
+> O diagrama deve mapear: **fluxo de usuários, frontend, API REST, banco de dados, VM e containers**.
+>
+> Ferramentas recomendadas: [Draw.io](https://app.diagrams.net/) ou [Visual Paradigm](https://online.visual-paradigm.com/).
+
+> **⚠️ ATENÇÃO: NÃO utilize padrão TOGAF nem fluxogramas simples. O uso desses formatos resultará em nota ZERO neste critério.**
+
+```
+[Link do diagrama aqui]
+```
+
+---
 
 ## Integrantes
 
-| Nome | RM |
-|------|-----|
-| Guilherme Costa Ribeiro | RM562700 |
+| RM     | Nome                       | Turma  |
+| ------ | -------------------------- | ------ |
+| 564113 | Camilo Micheletto da Silva | 2TDSPW |
+| 564982 | Carlos André Silva         | 2TDSPW |
+| 562700 | Guilherme Ribeiro da Costa | 2TDSPW |
+| 566376 | Laura Lopes Cruz           | 2TDSPW |
+
 
 **FIAP — Global Solutions 2026 — Java Advanced**
 
